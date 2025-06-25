@@ -1,4 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap");
+@font-face {
+  font-family: "Handwritten";
+  src: url("data:font/woff2;base64,d09GMgABAAAAAAjIAAoAAAAADMAAACABAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP0ZGVE0cGh4GYACBEhEICooyijsLIgABNgIkA0AEIAWDBQeWMX+I7JAFzGOHJqH8s7sUjbLl/Q==")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Coffee";
+  src: url("data:font/woff2;base64,d09GMgABAAAAAAkUAAoAAAAADQAAAAhcAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP0ZGVE0cGh4GYACBEhEICooyijsLIgABNgIkA0AEIAWDBQeWMX+I7JAFzGOHJqH8s7sUjbLl/Q==")
+    format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
 
 @tailwind base;
 @tailwind components;
@@ -6,97 +20,217 @@
 
 @layer base {
   :root {
-    --background: 254 252 251;
-    --foreground: 41 37 36;
+    /* Pantone 2025-4 Mocha Mousse палитра */
+    --pantone-mocha: 165 134 106;
+    --pantone-cream: 242 232 218;
+    --pantone-earth: 139 115 85;
+    --pantone-warm: 186 157 128;
+    --pantone-deep: 118 96 69;
 
+    --background: 254 252 249;
+    --foreground: 41 37 34;
     --card: 255 255 255;
-    --card-foreground: 41 37 36;
-
+    --card-foreground: 41 37 34;
     --popover: 255 255 255;
-    --popover-foreground: 41 37 36;
-
-    --primary: 212 175 55;
+    --popover-foreground: 41 37 34;
+    --primary: var(--pantone-mocha);
     --primary-foreground: 255 255 255;
-
-    --secondary: 253 242 248;
-    --secondary-foreground: 136 70 93;
-
-    --muted: 250 247 240;
-    --muted-foreground: 120 113 108;
-
-    --accent: 253 242 248;
-    --accent-foreground: 136 70 93;
-
-    --destructive: 239 68 68;
+    --secondary: var(--pantone-cream);
+    --secondary-foreground: var(--pantone-deep);
+    --muted: var(--pantone-warm);
+    --muted-foreground: var(--pantone-deep);
+    --accent: var(--pantone-earth);
+    --accent-foreground: 255 255 255;
+    --destructive: 220 38 38;
     --destructive-foreground: 254 242 242;
-
-    --border: 231 229 228;
-    --input: 231 229 228;
-    --ring: 212 175 55;
-
+    --border: var(--pantone-cream);
+    --input: var(--pantone-cream);
+    --ring: var(--pantone-mocha);
     --radius: 0.75rem;
 
-    --cosmetic-cream: 250 247 240;
-    --cosmetic-blush: 253 242 248;
-    --cosmetic-gold: 212 175 55;
-    --cosmetic-rose: 244 199 210;
-    --cosmetic-pearl: 248 250 252;
+    /* Золотое сечение для >1440px */
+    --golden-xs: 0.618rem;
+    --golden-sm: 1rem;
+    --golden-md: 1.618rem;
+    --golden-lg: 2.618rem;
+    --golden-xl: 4.236rem;
+    --golden-2xl: 6.854rem;
   }
 
   .dark {
-    --background: 12 10 9;
-    --foreground: 250 250 249;
-    --card: 28 25 23;
-    --card-foreground: 250 250 249;
-    --popover: 28 25 23;
-    --popover-foreground: 250 250 249;
-    --primary: 212 175 55;
-    --primary-foreground: 12 10 9;
-    --secondary: 68 64 60;
-    --secondary-foreground: 250 250 249;
-    --muted: 68 64 60;
-    --muted-foreground: 161 161 170;
-    --accent: 68 64 60;
-    --accent-foreground: 250 250 249;
+    --background: 24 20 18;
+    --foreground: 250 249 247;
+    --card: 35 29 25;
+    --card-foreground: 250 249 247;
+    --popover: 35 29 25;
+    --popover-foreground: 250 249 247;
+    --primary: var(--pantone-mocha);
+    --primary-foreground: 24 20 18;
+    --secondary: var(--pantone-deep);
+    --secondary-foreground: 250 249 247;
+    --muted: var(--pantone-earth);
+    --muted-foreground: 163 163 163;
+    --accent: var(--pantone-earth);
+    --accent-foreground: 250 249 247;
     --destructive: 127 29 29;
-    --destructive-foreground: 250 250 249;
-    --border: 68 64 60;
-    --input: 68 64 60;
-    --ring: 212 175 55;
+    --destructive-foreground: 250 249 247;
+    --border: var(--pantone-deep);
+    --input: var(--pantone-deep);
+    --ring: var(--pantone-mocha);
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground font-noto;
+    @apply bg-background text-foreground font-mono;
+    letter-spacing: 0.015em;
+  }
+
+  /* Кастомный кернинг для рукописного шрифта */
+  .handwritten {
+    font-family: "Handwritten", cursive;
+    letter-spacing: -0.02em;
+    word-spacing: 0.1em;
+  }
+
+  .coffee-font {
+    font-family: "Coffee", impact, sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  /* Акварельные фоны только для акций */
+  .watercolor-sale {
+    background: linear-gradient(
+      135deg,
+      rgba(165, 134, 106, 0.15) 0%,
+      rgba(186, 157, 128, 0.2) 50%,
+      rgba(242, 232, 218, 0.15) 100%
+    );
+  }
+
+  .watercolor-discount {
+    background: linear-gradient(
+      120deg,
+      rgba(139, 115, 85, 0.2) 0%,
+      rgba(165, 134, 106, 0.15) 60%,
+      rgba(118, 96, 69, 0.1) 100%
+    );
   }
 }
 
 @layer utilities {
-  .watercolor-bg {
-    background: linear-gradient(
-      135deg,
-      hsl(var(--cosmetic-blush)) 0%,
-      hsl(var(--cosmetic-cream)) 50%,
-      hsl(var(--cosmetic-pearl)) 100%
-    );
+  /* 7-колоночная сетка */
+  .grid-cols-7 {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
   }
 
-  .watercolor-pink {
-    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
+  .col-span-7 {
+    grid-column: span 7 / span 7;
   }
 
-  .watercolor-gold {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #f59e0b 100%);
+  /* Золотое сечение для >1440px */
+  @media (min-width: 1440px) {
+    .golden-p-xs {
+      padding: var(--golden-xs);
+    }
+    .golden-p-sm {
+      padding: var(--golden-sm);
+    }
+    .golden-p-md {
+      padding: var(--golden-md);
+    }
+    .golden-p-lg {
+      padding: var(--golden-lg);
+    }
+    .golden-p-xl {
+      padding: var(--golden-xl);
+    }
+    .golden-p-2xl {
+      padding: var(--golden-2xl);
+    }
+
+    .golden-m-xs {
+      margin: var(--golden-xs);
+    }
+    .golden-m-sm {
+      margin: var(--golden-sm);
+    }
+    .golden-m-md {
+      margin: var(--golden-md);
+    }
+    .golden-m-lg {
+      margin: var(--golden-lg);
+    }
+    .golden-m-xl {
+      margin: var(--golden-xl);
+    }
+    .golden-m-2xl {
+      margin: var(--golden-2xl);
+    }
   }
 
-  .zen-shadow {
+  /* Анимация синусоиды для корзины */
+  @keyframes sine-wave-to-cart {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    25% {
+      transform: translate(25%, -20px) scale(0.8);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate(50%, 15px) scale(0.6);
+      opacity: 0.6;
+    }
+    75% {
+      transform: translate(75%, -10px) scale(0.4);
+      opacity: 0.4;
+    }
+    100% {
+      transform: translate(100%, 5px) scale(0.2);
+      opacity: 0;
+    }
+  }
+
+  .animate-sine-to-cart {
+    animation: sine-wave-to-cart 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      forwards;
+  }
+
+  /* Плёночный эффект для изображений */
+  .film-photo {
+    filter: sepia(5%) saturate(90%) contrast(105%) brightness(95%);
+    border: 2px solid rgba(242, 232, 218, 0.8);
     box-shadow:
-      0 4px 20px rgba(0, 0, 0, 0.04),
-      0 1px 3px rgba(0, 0, 0, 0.02);
+      0 0 0 1px rgba(165, 134, 106, 0.2),
+      0 4px 8px rgba(0, 0, 0, 0.1),
+      inset 0 0 30px rgba(242, 232, 218, 0.1);
+  }
+
+  /* Мобильное меню снизу вверх */
+  .mobile-menu-slide {
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .mobile-menu-slide.open {
+    transform: translateY(0);
+  }
+
+  /* Кнопка наверх */
+  .scroll-to-top {
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .scroll-to-top.show {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

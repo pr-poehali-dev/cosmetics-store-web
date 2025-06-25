@@ -5,6 +5,7 @@ import BrandShowcase from "@/components/BrandShowcase";
 import SpecialOffers from "@/components/SpecialOffers";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const Index = () => {
   return (
@@ -16,6 +17,7 @@ const Index = () => {
       <SpecialOffers />
       <Newsletter />
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };

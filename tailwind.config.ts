@@ -15,12 +15,14 @@ export default {
       padding: "2rem",
       screens: {
         "2xl": "1400px",
+        "3xl": "1440px",
       },
     },
     extend: {
       fontFamily: {
-        noto: ["Noto Sans", "system-ui", "sans-serif"],
-        cormorant: ["Cormorant Garamond", "serif"],
+        mono: ["JetBrains Mono", "Consolas", "Monaco", "monospace"],
+        handwritten: ["Handwritten", "cursive"],
+        coffee: ["Coffee", "Impact", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -56,21 +58,28 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        cosmetic: {
-          cream: "hsl(var(--cosmetic-cream))",
-          blush: "hsl(var(--cosmetic-blush))",
-          gold: "hsl(var(--cosmetic-gold))",
-          rose: "hsl(var(--cosmetic-rose))",
-          pearl: "hsl(var(--cosmetic-pearl))",
+        pantone: {
+          mocha: "hsl(var(--pantone-mocha))",
+          cream: "hsl(var(--pantone-cream))",
+          earth: "hsl(var(--pantone-earth))",
+          warm: "hsl(var(--pantone-warm))",
+          deep: "hsl(var(--pantone-deep))",
         },
       },
+      // 7-колоночная сетка
+      gridTemplateColumns: {
+        "7": "repeat(7, minmax(0, 1fr))",
+      },
+      gridColumn: {
+        "span-7": "span 7 / span 7",
+      },
       spacing: {
-        "zen-1": "0.375rem",
-        "zen-2": "0.75rem",
-        "zen-3": "1.125rem",
-        "zen-4": "1.5rem",
-        "zen-6": "2.25rem",
-        "zen-8": "3rem",
+        "golden-xs": "var(--golden-xs)",
+        "golden-sm": "var(--golden-sm)",
+        "golden-md": "var(--golden-md)",
+        "golden-lg": "var(--golden-lg)",
+        "golden-xl": "var(--golden-xl)",
+        "golden-2xl": "var(--golden-2xl)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -86,26 +95,42 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "fade-in": {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
+        "sine-wave-to-cart": {
+          "0%": { transform: "translate(0, 0) scale(1)", opacity: "1" },
+          "25%": {
+            transform: "translate(25%, -20px) scale(0.8)",
+            opacity: "0.8",
+          },
+          "50%": {
+            transform: "translate(50%, 15px) scale(0.6)",
+            opacity: "0.6",
+          },
+          "75%": {
+            transform: "translate(75%, -10px) scale(0.4)",
+            opacity: "0.4",
+          },
+          "100%": {
+            transform: "translate(100%, 5px) scale(0.2)",
+            opacity: "0",
+          },
         },
-        "scale-hover": {
-          "0%": { transform: "scale(1)" },
-          "100%": { transform: "scale(1.02)" },
+        "mobile-slide-up": {
+          from: { transform: "translateY(100%)" },
+          to: { transform: "translateY(0)" },
         },
-        "cart-bounce": {
-          "0%": { transform: "scale(1)" },
-          "50%": { transform: "scale(1.1)" },
-          "100%": { transform: "scale(1)" },
+        "scroll-fade-in": {
+          from: { transform: "translateY(100px)", opacity: "0" },
+          to: { transform: "translateY(0)", opacity: "1" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.5s ease-out",
-        "scale-hover": "scale-hover 0.2s ease-out",
-        "cart-bounce": "cart-bounce 0.3s ease-out",
+        "sine-to-cart":
+          "sine-wave-to-cart 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+        "mobile-slide":
+          "mobile-slide-up 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "scroll-appear": "scroll-fade-in 0.3s ease",
       },
     },
   },
